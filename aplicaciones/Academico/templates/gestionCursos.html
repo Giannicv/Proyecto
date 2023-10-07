@@ -4,6 +4,27 @@
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
 <h2>Gestion de alumnos</h2>
+<div class="card">
+    <div class="card-body">
+        <form action="/registrarAlumno/" method="post">{% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="textCodigo" name="textCodigo" class="form-control" placeholder="Codigo" 
+                minlength="6" maxlength="6" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="textNombre" name="textNombre" class="form-control" placeholder="Nombre" 
+                maxlength="50" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="numNota" name="numNota" class="form-control" placeholder="Nota" 
+                min="1" max="3" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white">Guardar </button>
+            </div>
+        </form>
+    </div>
+</div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
         <h1>Listado de alumnos</h1>
@@ -14,18 +35,19 @@
         <th>Codigo</th>
         <th>Nombre</th>
         <th>Nota</th>
+        <th colspan="">Opciones</th>
     </tr>
 </thead>
 <tbody>
     {% for c in alumnos %}
-<tr>
-    <td>
-        {{c.codigo}}
-        {{c.nombre}}
-        {{c.nota}}
-    </td>
-</tr>
-{% endfor %}
+        <tr>
+            <td>{{ c.codigo }}</td>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.nota }}</td>
+            <td><a href="edicionAlumno/{{c.codigo}}" class="btn btn-info">Editar</a></td>
+            <td><a href="eliminarAlumno/{{c.codigo}}" class="btn btn-danger">Eliminar</a></td>
+        </tr>
+    {% endfor %}
 </tbody>
             </table>
         </div>
